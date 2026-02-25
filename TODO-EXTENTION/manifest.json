@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Simple To-Do Manager",
+  "version": "1.0",
+  "description": "A simple to-do list Chrome extension.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/to-do-list.png",
+      "48": "icons/to-do-list.png",
+      "128": "icons/to-do-list.png"
+    }
+  },
+  "permissions": ["storage"]
+}
