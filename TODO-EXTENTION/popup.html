@@ -1,20 +1,26 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>To-Do List</title>
-  <link rel="stylesheet" href="popup.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My To-Do List</title>
+  <link rel="stylesheet" href="popup.css" />
 </head>
 <body>
   <div class="container">
     <h2>📝 My To-Do List</h2>
-    
+
     <div class="input-area">
-      <input type="text" id="taskInput" placeholder="Add a new task..." />
-      <button id="addBtn">Add</button>
+      <input id="taskInput" type="text" placeholder="할 일을 입력하고 Enter" autocomplete="off" />
+      <button id="addBtn" type="button">Add</button>
     </div>
 
     <ul id="taskList"></ul>
+
+    <div class="hint">
+      <div>• Enter: 추가</div>
+      <div>• 항목 더블클릭: 수정 (수정 시 날짜 갱신)</div>
+    </div>
   </div>
 
   <script src="popup.js"></script>
