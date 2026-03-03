@@ -1,251 +1,195 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>My Web Card</title>
+    <meta charset="UTF-8">
+    <title>My Web Card</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+        /* 배경 */
+        .overlay {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.3s;
+        }
 
-<style>
-body{
-    margin:0;
-    font-family:'Poppins', sans-serif;
-}
+        /* 카드 */
+        .card {
+            background: #f2f2f2;
+            width: 420px;
+            padding: 55px 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+            position: relative;
+            transition: 0.3s;
+        }
 
-/* 기본 배경 */
-.overlay{
-    position:fixed;
-    width:100%;
-    height:100vh;
-    background:rgba(0,0,0,0.5);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    transition:0.3s;
-}
+        /* 닫기 버튼 */
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #999;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            line-height: 28px;
+            cursor: pointer;
+            font-size: 14px;
+        }
 
-/* 카드 */
-.card{
-    background:#f2f2f2;
-    width:420px;
-    padding:50px 40px;
-    border-radius:20px;
-    text-align:center;
-    box-shadow:0 20px 50px rgba(0,0,0,0.25);
-    position:relative;
-    transition:0.3s;
-}
+        /* 프로필 사진 */
+        img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
 
-/* 닫기 버튼 */
-.close{
-    position:absolute;
-    top:15px;
-    right:15px;
-    background:#999;
-    color:white;
-    width:28px;
-    height:28px;
-    border-radius:50%;
-    line-height:28px;
-    cursor:pointer;
-    font-size:14px;
-}
+        h1 {
+            margin: 18px 0 6px;
+        }
 
-img{
-    width:130px;
-    height:130px;
-    border-radius:50%;
-    object-fit:cover;
-}
+        .title {
+            color: gray;
+            margin-bottom: 18px;
+            font-size: 18px;
+        }
 
-h1{
-    margin:20px 0 5px;
-}
+        /* 안내문 박스 */
+        .notice {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 16px;
+            margin: 10px 0 20px;
+            font-size: 13px;
+            line-height: 1.6;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+            text-align: left;
+        }
 
-.title{
-    color:gray;
-    margin-bottom:12px;
-}
+        .notice strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
 
-/* ===== 자격/과목 배지(작은 카드) ===== */
-.badges{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    justify-content:center;
-    margin: 8px 0 18px;
-}
+        .qr-box {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #e5e5e5;
+            font-size: 12px;
+            color: #444;
+        }
 
-.badge{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    padding:8px 12px;
-    background:#ffffff;
-    border-radius:12px;
-    font-size:12px;
-    font-weight:500;
-    box-shadow: 0 8px 18px rgba(0,0,0,0.08);
-}
+        /* 이메일 및 버튼 */
+        .email {
+            margin: 10px 0;
+            font-size: 14px;
+        }
 
-.badge svg{
-    width:16px;
-    height:16px;
-    flex:0 0 16px;
-}
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            border: none;
+            background: #2d6cdf;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
 
-.email{
-    margin:10px 0;
-    font-size:14px;
-}
+        .links {
+            margin-top: 15px;
+        }
 
-button{
-    margin-top:15px;
-    padding:10px 20px;
-    border:none;
-    background:#2d6cdf;
-    color:white;
-    border-radius:6px;
-    cursor:pointer;
-    font-size:14px;
-}
+        .links a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #2d6cdf;
+            font-size: 14px;
+        }
 
-.links{
-    margin-top:15px;
-}
+        /* 다크모드 설정 */
+        .dark-overlay {
+            background: rgba(0, 0, 0, 0.9);
+        }
 
-.links a{
-    margin:0 10px;
-    text-decoration:none;
-    color:#2d6cdf;
-    font-size:14px;
-}
+        .dark-card {
+            background: #1e1e1e;
+            color: white;
+        }
 
-/* ===== 다크모드 ===== */
-.dark-overlay{
-    background:rgba(0,0,0,0.9);
-}
+        .dark-card .title {
+            color: #ccc;
+        }
 
-.dark-card{
-    background:#1e1e1e;
-    color:white;
-}
+        .dark-card .notice {
+            background: #2a2a2a;
+            box-shadow: none;
+        }
 
-.dark-card .title{
-    color:#ccc;
-}
+        .dark-card .qr-box {
+            border-top: 1px solid #3a3a3a;
+            color: #ccc;
+        }
 
-/* 배지 다크모드 */
-.dark-card .badge{
-    background:#2a2a2a;
-    box-shadow:none;
-}
-
-.dark-card .badge svg{
-    color:#6ea8ff;
-}
-
-.dark-card .links a{
-    color:#6ea8ff;
-}
-</style>
+        .dark-card .links a {
+            color: #6ea8ff;
+        }
+    </style>
 </head>
-
 <body>
 
 <div class="overlay">
-  <div class="card">
+    <div class="card">
+        <div class="close">X</div>
+      <img src="./profile.jpg" alt="profile">
+        <h1>Youngin Lee</h1>
+        <div class="title">University Lecturer in Education</div>
 
-    <div class="close">X</div>
+        <div class="notice">
+            <strong>안내</strong>
+            학생분들은 <b>학점, 과제, 시험</b> 관련 반드시 <b>오픈카카오톡</b>으로 연락주세요.
+            <div class="qr-box">
+                QR주소: <b>사이버캠퍼스 확인</b>
+            </div>
+        </div>
 
-    <img src="profile.jpg" alt="profile">
+        <div class="email">pollyortaki@gmail.com</div>
+        <button onclick="copyEmail()">이메일 복사</button>
 
-    <h1>Youngin Lee</h1>
-    <div class="title">English Lecturer</div>
+        <div class="links">
+            <a href="#">공지사항</a>
+            <a href="#">수업자료 다운로드</a>
+            <a href="https://open.kakao.com/o/sK4705ii" target="_blank" rel="noopener noreferrer">오픈카톡연락처</a>
+        </div>
 
-    <!-- ✅ 여기부터 추가된 부분: 작은 카드(배지) + SVG 아이콘 -->
-    <div class="badges">
-      <div class="badge">
-        <!-- Book icon -->
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-        </svg>
-        TOEFL
-      </div>
-
-      <div class="badge">
-        <!-- Globe icon -->
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="10"></circle>
-          <path d="M2 12h20"></path>
-          <path d="M12 2a15.3 15.3 0 0 1 0 20"></path>
-          <path d="M12 2a15.3 15.3 0 0 0 0 20"></path>
-        </svg>
-        IELTS
-      </div>
-
-      <div class="badge">
-        <!-- Message icon -->
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"></path>
-        </svg>
-        OPIC
-      </div>
-
-      <div class="badge">
-        <!-- Mic icon -->
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"></path>
-          <path d="M19 11a7 7 0 0 1-14 0"></path>
-          <path d="M12 18v4"></path>
-          <path d="M8 22h8"></path>
-        </svg>
-        TOEIC SPEAKING
-      </div>
-
-      <div class="badge">
-        <!-- Check-circle icon -->
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="10"></circle>
-          <path d="M9 12l2 2 4-4"></path>
-        </svg>
-        TOEIC LC/RC 
-      </div>
+        <button onclick="toggleDarkMode()">다크모드 전환</button>
     </div>
-    <!-- ✅ 여기까지 -->
-
-    <div class="email">
-      pollyortaki@gmail.com
-    </div>
-
-    <button onclick="copyEmail()">이메일 복사</button>
-
-    <div class="links">
-      <a href="#">GitHub</a>
-      <a href="#">LinkedIn</a>
-    </div>
-
-    <button onclick="toggleDarkMode()">다크모드 전환</button>
-
-  </div>
 </div>
 
 <script>
-function copyEmail(){
-    navigator.clipboard.writeText("pollyortaki@gmail.com");
-    alert("이메일이 복사되었습니다.");
-}
+    function copyEmail() {
+        navigator.clipboard.writeText("pollyortaki@gmail.com");
+        alert("이메일이 복사되었습니다.");
+    }
 
-function toggleDarkMode(){
-    document.querySelector(".overlay").classList.toggle("dark-overlay");
-    document.querySelector(".card").classList.toggle("dark-card");
-}
+    function toggleDarkMode() {
+        document.querySelector(".overlay").classList.toggle("dark-overlay");
+        document.querySelector(".card").classList.toggle("dark-card");
+    }
 </script>
 
 </body>
